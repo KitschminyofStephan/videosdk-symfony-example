@@ -72,7 +72,7 @@
                     },
 
                     participantCanLeave: true,
-                    redirectOnLeave: "127.0.0.1:8000",
+                    //redirectOnLeave: "http://127.0.0.1:8000",
 
                     permissions: {
                         pin: true,
@@ -99,6 +99,23 @@
 
             script.src ="https://sdk.videosdk.live/rtc-js-prebuilt/{{ VIDEOSDK_VERSION }}/rtc-js-prebuilt.js";
             document.getElementsByTagName("head")[0].appendChild(script);
+
+            displayVideoSDKFrame();            
         }
+
+        async function displayVideoSDKFrame() {
+
+            var videoSKDiframe = null;
+            while (videoSKDiframe === null) {
+                videoSKDiframe = document.getElementById("videosdk-frame");
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+
+            var divVideoSDK = videoSKDiframe.parentNode;
+            divVideoSDK.removeAttribute("style");
+            divVideoSDK.setAttribute('id', 'video-content');
+
+            videoSKDiframe.style.visibility = "visible";
+        } 
     </script>
 {% endblock %}
