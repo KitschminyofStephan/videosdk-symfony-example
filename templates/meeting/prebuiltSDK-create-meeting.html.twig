@@ -5,5 +5,71 @@
 {% block body %}
 <div class="content">
     <h1>Prebuilt SDK Example ✅</h1>
+
+     <div id="joinMeetingInput">
+            <div>
+                <label for="meetingId">Meeting Name :</label>
+                <input type="text" id="meetingId" name="meetingId" minlength="4" maxlength="16">
+            </div>
+            <div>
+                <label for="username">User Name :</label>
+                <input type="text" id="username" name="username" maxlength="16">
+            </div>
+
+            <button class="joinMeetingButton" onClick="joinMeeting()">Join Meeting</button>
+    </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+
+        function joinMeeting() {
+            // 1 Meeting Name
+            var meetingId = $("#meetingId").val();
+            
+            if (meetingId.length < 4) {
+                alert("Meeting name min length is 4");
+                return
+            }
+
+            // 2 User name 
+            var username = $("#username").val();
+
+            if (username.length < 4) {
+                alert("Username min length is 4");
+                return
+            }
+
+            startMeeting(meetingId, username);
+        }
+
+        function startMeeting(meetingId, username) {
+            script.addEventListener("load", function (event) {
+                const config = {
+                name: username,
+                meetingId: meetingId,
+                apiKey: "{{ VIDEOSDK_API_KEY}}",
+
+                containerId: null,
+
+                micEnabled: true,
+                webcamEnabled: true,
+                participantCanToggleSelfWebcam: true,
+                participantCanToggleSelfMic: true,
+
+                chatEnabled: true,
+                screenShareEnabled: true,
+                };
+
+                const meeting = new VideoSDKMeeting();
+                meeting.init(config);
+            });
+
+            script.src ="https://sdk.videosdk.live/rtc-js-prebuilt/{{ VIDEOSDK_VERSION }}/rtc-js-prebuilt.js";
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+    </script>
 {% endblock %}

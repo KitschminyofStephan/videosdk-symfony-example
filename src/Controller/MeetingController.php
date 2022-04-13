@@ -22,7 +22,10 @@ class MeetingController extends AbstractController
      */
     public function prebuiltSDKCreateMeeting(): Response
     {
-        return $this->render('meeting/prebuiltSDK-create-meeting.html.twig');
+        return $this->render('meeting/prebuiltSDK-create-meeting.html.twig', [
+            'VIDEOSDK_API_KEY' => $this->getParameter('app.videosdk_api_key'),
+            'VIDEOSDK_VERSION' => $this->getParameter('app.videosdk_version'),
+        ]);
     }
 
     /**
