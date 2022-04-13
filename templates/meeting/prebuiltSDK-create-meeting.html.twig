@@ -49,19 +49,48 @@
         function startMeeting(meetingId, username) {
             script.addEventListener("load", function (event) {
                 const config = {
-                name: username,
-                meetingId: meetingId,
-                apiKey: "{{ VIDEOSDK_API_KEY}}",
+                    name: username,
+                    meetingId: meetingId,
+                    apiKey: "{{ VIDEOSDK_API_KEY}}",
 
-                containerId: null,
+                    containerId: null,
 
-                micEnabled: true,
-                webcamEnabled: true,
-                participantCanToggleSelfWebcam: true,
-                participantCanToggleSelfMic: true,
+                    micEnabled: true,
+                    webcamEnabled: true,
+                    participantCanToggleSelfWebcam: true,
+                    participantCanToggleSelfMic: true,
+                    maxResolution: "sd",
 
-                chatEnabled: true,
-                screenShareEnabled: true,
+                    chatEnabled: true,
+                    screenShareEnabled: true,
+
+                    raiseHandEnabled: true,
+
+                    joinScreen: {
+                        visible: false,
+                        title: "Test title",
+                    },
+
+                    participantCanLeave: true,
+                    redirectOnLeave: "127.0.0.1:8000",
+
+                    permissions: {
+                        pin: true,
+                        removeParticipant: true,
+                        endMeeting: true,
+                        toggleRecording: true,
+                        toggleLivestream: false,
+                    },
+
+                    recording: {
+                        enabled: false,
+                    },
+
+                    branding: {
+                        enabled: false,
+                    },
+                    
+                    whiteboardEnabled: false,
                 };
 
                 const meeting = new VideoSDKMeeting();
