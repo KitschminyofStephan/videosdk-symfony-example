@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    width: 75%;
+    margin: auto;
+    text-align: center;
+}
+
+.content code { 
+    background: #F5F5F5; 
+    padding: 2px 6px; 
+}
+
+.joinMeetingButton {
+    margin-top: 20px;
+    background-color: #2D8CFF;
+    color: #ffffff;
+    text-decoration: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: inline-block;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
