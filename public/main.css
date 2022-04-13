@@ -36,6 +36,21 @@
     background-color: darkgray;
 }
 
+#joinMeetingInput div {
+    margin: auto;
+    padding-top: 5px;
+}
+
+#joinMeetingInput div label {
+    width: 200px;
+    padding: 5px;
+}
+
+#joinMeetingInput div input {
+    width: 200px;
+    padding: 5px;
+}
+
 
 #videosdk-frame {
     visibility: hidden;
