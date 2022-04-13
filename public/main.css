@@ -14,7 +14,8 @@
     padding: 2px 6px; 
 }
 
-#joinMeetingButton {
+#joinMeetingInput button,
+#closeMeetingInput button{
     margin-top: 20px;
     background-color: #2D8CFF;
     color: #ffffff;
@@ -30,14 +31,20 @@
     outline: none;
 }
 
+#joinMeetingInput button:disabled,
+#closeMeetingInput button:disabled {
+    background-color: darkgray;
+}
+
 
 #videosdk-frame {
     visibility: hidden;
 }
 
-#video-content {
-    width: 640px;
-    height: 580px;
+#video-style {
+    width: 700px;
+    height: 500px;
     margin: auto;
+    padding-top: 1em;
     position: static;
 }

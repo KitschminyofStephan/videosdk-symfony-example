@@ -6,7 +6,7 @@
 <div class="content">
     <h1>Prebuilt SDK Example ✅</h1>
 
-     <div id="joinMeetingInput">
+    <div id="joinMeetingInput">
             <div>
                 <label for="meetingId">Meeting Name :</label>
                 <input type="text" id="meetingId" name="meetingId" minlength="4" maxlength="16">
@@ -16,15 +16,24 @@
                 <input type="text" id="username" name="username" maxlength="16">
             </div>
 
-            <button id="joinMeetingButton" onClick="joinMeeting()">Join Meeting</button>
+            <button id="joinMeetingButton" onClick="joinMeeting()">Create Meeting</button>
     </div>
+
+    <div id="video-content">
+
+    </div>
+
+    <div id="closeMeetingInput">
+        <button id="closeMeetingButton" onClick="closeMeeting()" disabled>Close Meeting</button>
+    </div>
+
+
 </div>
 {% endblock %}
 
 {% block javascripts %}
     <script>
-        var script = document.createElement("script");
-        script.type = "text/javascript";
+       
 
         /**
         * Check if form values and start the meeting
@@ -44,8 +53,9 @@
             if (username.length < 4) {
                 alert("Username min length is 4");
                 return
-            }
+            }  
 
+            document.getElementById('joinMeetingButton').disabled = true;
             startMeeting(meetingId, username);
         }
 
@@ -55,7 +65,12 @@
         *  @param string username
         */
         function startMeeting(meetingId, username) {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+
+            console.log("start meeting");
             script.addEventListener("load", function (event) {
+                console.log("event");    
                 const config = {
                     name: username,
                     meetingId: meetingId,
@@ -74,13 +89,13 @@
 
                     raiseHandEnabled: true,
 
-                    joinScreen: {
-                        visible: false,
+                    joinScreen: { // join screen where you can configure mic / cam ...
+                        visible: true,
                         title: "Test title",
                     },
 
                     participantCanLeave: true,
-                    //redirectOnLeave: "http://127.0.0.1:8000",
+                    //redirectOnLeave: "http://127.0.0.1:8000", // cna be use to redirect when user leave the meeting 
 
                     permissions: {
                         pin: true,
@@ -115,20 +130,35 @@
         *   To display the videosdk iframe like an element of the page and not on all the page content
         */
         async function displayVideoSDKFrame() {
+            console.log("display video");
             // Waiting to get videosdk iframe element
             var videoSKDiframe = null;
             while (videoSKDiframe === null) {
                 videoSKDiframe = document.getElementById("videosdk-frame");
                 await new Promise(resolve => setTimeout(resolve, 1000));
+                console.log("here")
             }
-
+            console.log(videoSKDiframe);
             // Get videosdk.live parent's div and change style
             var divVideoSDK = videoSKDiframe.parentNode;
+            divVideoSDK.remove()
+            document.getElementById("video-content").appendChild(divVideoSDK);
             divVideoSDK.removeAttribute("style");
-            divVideoSDK.setAttribute('id', 'video-content');
+            divVideoSDK.setAttribute('id', 'video-style');
 
-            // Set to hidden on css file to don't have a full screen videosdk iframe before we set the video-content style
+            // Set to hidden on css file to don't have a full screen videosdk iframe before we set the video style
             videoSKDiframe.style.visibility = "visible";
+
+            // enable close meeting button
+            document.getElementById('closeMeetingButton').disabled = false;
         } 
+
+        // End call close the meeting frame
+        function closeMeeting() {
+            document.getElementById("video-content").replaceChildren();
+            document.getElementById('closeMeetingButton').disabled = true;
+            document.getElementById('joinMeetingButton').disabled = false;
+            document.getElementsByTagName("head")[0].lastElementChild.remove();
+        }
     </script>
 {% endblock %}
