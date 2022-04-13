@@ -16,7 +16,7 @@
                 <input type="text" id="username" name="username" maxlength="16">
             </div>
 
-            <button class="joinMeetingButton" onClick="joinMeeting()">Join Meeting</button>
+            <button id="joinMeetingButton" onClick="joinMeeting()">Join Meeting</button>
     </div>
 </div>
 {% endblock %}
@@ -26,6 +26,9 @@
         var script = document.createElement("script");
         script.type = "text/javascript";
 
+        /**
+        * Check if form values and start the meeting
+        */
         function joinMeeting() {
             // 1 Meeting Name
             var meetingId = $("#meetingId").val();
@@ -46,6 +49,11 @@
             startMeeting(meetingId, username);
         }
 
+        /**
+        *   Create videoSKD.live meeting
+        *  @param string meetingId
+        *  @param string username
+        */
         function startMeeting(meetingId, username) {
             script.addEventListener("load", function (event) {
                 const config = {
@@ -103,18 +111,23 @@
             displayVideoSDKFrame();            
         }
 
+        /**
+        *   To display the videosdk iframe like an element of the page and not on all the page content
+        */
         async function displayVideoSDKFrame() {
-
+            // Waiting to get videosdk iframe element
             var videoSKDiframe = null;
             while (videoSKDiframe === null) {
                 videoSKDiframe = document.getElementById("videosdk-frame");
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
 
+            // Get videosdk.live parent's div and change style
             var divVideoSDK = videoSKDiframe.parentNode;
             divVideoSDK.removeAttribute("style");
             divVideoSDK.setAttribute('id', 'video-content');
 
+            // Set to hidden on css file to don't have a full screen videosdk iframe before we set the video-content style
             videoSKDiframe.style.visibility = "visible";
         } 
     </script>

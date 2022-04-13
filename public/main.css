@@ -14,7 +14,7 @@
     padding: 2px 6px; 
 }
 
-.joinMeetingButton {
+#joinMeetingButton {
     margin-top: 20px;
     background-color: #2D8CFF;
     color: #ffffff;
