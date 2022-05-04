@@ -9,6 +9,7 @@
             <ul>
                 <li><a href="#prerequisites">Prerequisites</a></li>
                 <li><a href="#installation">Installation</a></li>
+                <li><a href="#started">Started</a></li>
             </ul>
         </li>
     </ol>
@@ -67,5 +68,13 @@ Install Symfont CLI with scoop
     ```
 
 4. Create .env.local
-create new file .env.local and copy the content of .env
-change VIDEOSDK_API_KEY with your key
+    create new file .env.local and copy the content of .env
+    change VIDEOSDK_API_KEY with your key
+
+5. Start the server
+    ```sh
+        symfony server:start
+    ```
+
+    go to <a href="http://localhost:8000">http://localhost:8000</a>
+
